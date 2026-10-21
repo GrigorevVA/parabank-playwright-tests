@@ -1,4 +1,5 @@
 import { expect } from '@playwright/test';
+import { fetchCustomerAccounts } from '@app/api/rest/helpers/account-helper';
 import { registerCustomer } from '@app/api/rest/helpers/customer-helper';
 import { LeftMenu } from '@app/components/left-menu';
 import { WRONG_PASSWORD } from '@app/data/negative-data';
@@ -10,8 +11,14 @@ import { Given, Then, When } from './fixtures';
 import './parameter-types';
 import type { PasswordKind } from './parameter-types';
 
-Given('a registered customer', async ({ newCustomer }) => {
-  await registerCustomer(newCustomer);
+Given('a registered customer', async ({ newCustomer, accounts }) => {
+  const customer = await registerCustomer(newCustomer);
+  accounts.push(...(await fetchCustomerAccounts(customer.id)));
+});
+
+Given('I am logged in', async ({ newCustomer }) => {
+  await HomePage.open();
+  await HomePage.logIn(newCustomer.username, newCustomer.password);
 });
 
 Given('I am on the Home page', async () => {
@@ -33,6 +40,10 @@ When('I log out', async () => {
 
 When('I register as a new customer', async ({ newCustomer }) => {
   await RegisterPage.register(newCustomer);
+});
+
+When('I register as a new customer with a mismatched password confirmation', async ({ newCustomer }) => {
+  await RegisterPage.register(newCustomer, WRONG_PASSWORD);
 });
 
 When(
@@ -66,6 +77,10 @@ Then('I see the welcome message for the new customer', async ({ newCustomer }) =
     'Welcome title should name the new customer',
   ).toBeVisible();
   await expect(RegisterPage.successMessage().locator, 'Success message should be shown').toBeVisible();
+});
+
+Then('I see the {string} error under password confirmation', async ({}, message: string) => {
+  await expect(RegisterPage.confirmError(message).locator, 'Confirm error should be shown').toBeVisible();
 });
 
 Then(

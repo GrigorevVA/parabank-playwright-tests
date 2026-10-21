@@ -23,6 +23,9 @@ export class RegisterPage {
   static readonly fieldError = (field: RegisterField, message: string) =>
     new HtmlElement(formRow(REGISTER_FIELD_LABELS[field]).getByText(message), `${field} error`);
 
+  static readonly confirmError = (message: string) =>
+    new HtmlElement(formRow('Confirm:').getByText(message), 'Confirm error');
+
   static readonly registerButton = () =>
     new HtmlElement(getPage().getByRole('button', { name: 'Register' }), 'Register button');
 
@@ -38,12 +41,12 @@ export class RegisterPage {
     });
   }
 
-  static async register(customer: NewCustomer): Promise<void> {
+  static async register(customer: NewCustomer, confirmation = customer.password): Promise<void> {
     await step(`Register customer ${customer.username}`, async () => {
       for (const field of Object.keys(REGISTER_FIELD_LABELS) as RegisterField[]) {
         await RegisterPage.field(field).fill(customer[field]);
       }
-      await RegisterPage.confirmInput().fill(customer.password);
+      await RegisterPage.confirmInput().fill(confirmation);
       await RegisterPage.registerButton().click();
     });
   }

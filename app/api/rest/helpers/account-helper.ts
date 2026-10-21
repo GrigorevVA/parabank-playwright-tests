@@ -1,7 +1,7 @@
 import { expectStatus, type StatusCheckOptions } from '@core/api/expect-status';
 import { step } from '@core/utils/step';
-import { getAccount, type Account, type AccountType } from '../account';
-import { postCreateAccount } from '../create-account';
+import { getAccount, type Account } from '../account';
+import { postCreateAccount, type NewAccountType } from '../create-account';
 import { getCustomerAccounts } from '../customer-accounts';
 
 export function fetchAccount(accountId: number, options?: StatusCheckOptions): Promise<Account> {
@@ -25,7 +25,7 @@ export function fetchCustomerAccounts(
 
 export function openAccount(
   customerId: number,
-  type: AccountType,
+  type: NewAccountType,
   fromAccountId: number,
   options?: StatusCheckOptions,
 ): Promise<Account> {

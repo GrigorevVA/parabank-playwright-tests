@@ -4,7 +4,7 @@ import { JSON_HEADERS } from './json-headers';
 
 const accountUrl = (accountId: number): string => `services/bank/accounts/${accountId}`;
 
-export type AccountType = 'CHECKING' | 'SAVINGS';
+export type AccountType = 'CHECKING' | 'SAVINGS' | 'LOAN';
 
 export type Account = {
   id: number;

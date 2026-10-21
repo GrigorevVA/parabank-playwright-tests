@@ -5,11 +5,14 @@ import { JSON_HEADERS } from './json-headers';
 
 const CREATE_ACCOUNT_URL = 'services/bank/createAccount';
 
-const ACCOUNT_TYPE_CODE: Record<AccountType, number> = { CHECKING: 0, SAVINGS: 1 };
+// LOAN accounts appear only after an approved loan request
+export type NewAccountType = Exclude<AccountType, 'LOAN'>;
+
+const ACCOUNT_TYPE_CODE: Record<NewAccountType, number> = { CHECKING: 0, SAVINGS: 1 };
 
 export function postCreateAccount(
   customerId: number,
-  type: AccountType,
+  type: NewAccountType,
   fromAccountId: number,
 ): Promise<APIResponse> {
   return getRequest().post(CREATE_ACCOUNT_URL, {
