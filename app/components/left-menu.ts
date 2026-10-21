@@ -21,6 +21,6 @@ export class LeftMenu {
   }
 
   static async logOut(): Promise<void> {
-    await step('Log out', () => LeftMenu.link('Log Out').click());
+    await LeftMenu.link('Log Out').click();
   }
 }

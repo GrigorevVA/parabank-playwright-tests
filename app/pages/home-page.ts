@@ -17,8 +17,8 @@ export class HomePage {
   static readonly logInButton = () =>
     new HtmlElement(getPage().getByRole('button', { name: 'Log In' }), 'Log In button');
 
-  static readonly loginError = () =>
-    new HtmlElement(getPage().locator('#rightPanel .error'), 'Login error');
+  static readonly loginError = (message: string) =>
+    new HtmlElement(getPage().getByText(message, { exact: true }), 'Login error');
 
   static async open(): Promise<void> {
     await step('Open Home page', async () => {

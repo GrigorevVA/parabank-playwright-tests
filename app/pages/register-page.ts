@@ -3,7 +3,11 @@ import { Input } from '@core/elements/input';
 import { getPage } from '@core/page-holder';
 import { step } from '@core/utils/step';
 import type { NewCustomer } from '../api/rest/register';
-import { REGISTER_FIELD_LABELS, type RegisterField } from '../data/register-fields';
+import {
+  REGISTER_FIELD_LABELS,
+  REGISTER_SUCCESS_MESSAGE,
+  type RegisterField,
+} from '../data/register-fields';
 
 // labels sit in a neighbour cell, so fields are found by table row
 const formRow = (label: string) =>
@@ -16,8 +20,8 @@ export class RegisterPage {
   static readonly confirmInput = () =>
     new Input(formRow('Confirm:').locator('input'), 'Confirm input');
 
-  static readonly fieldError = (field: RegisterField) =>
-    new HtmlElement(formRow(REGISTER_FIELD_LABELS[field]).locator('.error'), `${field} error`);
+  static readonly fieldError = (field: RegisterField, message: string) =>
+    new HtmlElement(formRow(REGISTER_FIELD_LABELS[field]).getByText(message), `${field} error`);
 
   static readonly registerButton = () =>
     new HtmlElement(getPage().getByRole('button', { name: 'Register' }), 'Register button');
@@ -26,10 +30,7 @@ export class RegisterPage {
     new HtmlElement(getPage().getByRole('heading', { name: `Welcome ${username}` }), 'Welcome title');
 
   static readonly successMessage = () =>
-    new HtmlElement(
-      getPage().getByText('Your account was created successfully. You are now logged in.'),
-      'Success message',
-    );
+    new HtmlElement(getPage().getByText(REGISTER_SUCCESS_MESSAGE), 'Success message');
 
   static async open(): Promise<void> {
     await step('Open Register page', async () => {

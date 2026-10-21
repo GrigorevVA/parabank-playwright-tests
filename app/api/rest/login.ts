@@ -2,7 +2,7 @@ import type { APIResponse } from '@playwright/test';
 import { getRequest } from '@core/request-holder';
 import { JSON_HEADERS } from './json-headers';
 
-export const loginUrl = (username: string, password: string): string =>
+const loginUrl = (username: string, password: string): string =>
   `services/bank/login/${username}/${password}`;
 
 export type Customer = {

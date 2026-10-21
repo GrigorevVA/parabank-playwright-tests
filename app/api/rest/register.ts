@@ -2,7 +2,7 @@ import type { APIResponse } from '@playwright/test';
 import { getRequest } from '@core/request-holder';
 
 // ParaBank has no REST registration, so the HTML form endpoint is used
-export const REGISTER_URL = 'register.htm';
+const REGISTER_URL = 'register.htm';
 
 export type NewCustomer = {
   firstName: string;

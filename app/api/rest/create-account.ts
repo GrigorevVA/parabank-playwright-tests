@@ -3,7 +3,7 @@ import { getRequest } from '@core/request-holder';
 import type { AccountType } from './account';
 import { JSON_HEADERS } from './json-headers';
 
-export const CREATE_ACCOUNT_URL = 'services/bank/createAccount';
+const CREATE_ACCOUNT_URL = 'services/bank/createAccount';
 
 const ACCOUNT_TYPE_CODE: Record<AccountType, number> = { CHECKING: 0, SAVINGS: 1 };
 

@@ -8,6 +8,7 @@ import { HomePage } from '@app/pages/home-page';
 import { RegisterPage } from '@app/pages/register-page';
 import { Given, Then, When } from './fixtures';
 import './parameter-types';
+import type { PasswordKind } from './parameter-types';
 
 Given('a registered customer', async ({ newCustomer }) => {
   await registerCustomer(newCustomer);
@@ -21,7 +22,7 @@ Given('I am on the Register page', async () => {
   await RegisterPage.open();
 });
 
-When('I log in with a {passwordKind} password', async ({ newCustomer }, kind: string) => {
+When('I log in with a {passwordKind} password', async ({ newCustomer }, kind: PasswordKind) => {
   const password = kind === 'valid' ? newCustomer.password : WRONG_PASSWORD;
   await HomePage.logIn(newCustomer.username, password);
 });
@@ -49,7 +50,7 @@ Then('I see the Accounts Overview page', async () => {
 });
 
 Then('I see the login error {string}', async ({}, message: string) => {
-  await expect(HomePage.loginError().locator, 'Login error should be shown').toHaveText(message);
+  await expect(HomePage.loginError(message).locator, 'Login error should be shown').toBeVisible();
 });
 
 Then('I see the Customer Login form', async () => {
@@ -70,8 +71,9 @@ Then('I see the welcome message for the new customer', async ({ newCustomer }) =
 Then(
   'I see the {string} error under {registerField}',
   async ({}, message: string, field: RegisterField) => {
-    await expect(RegisterPage.fieldError(field).locator, `${field} error should be shown`).toHaveText(
-      message,
-    );
+    await expect(
+      RegisterPage.fieldError(field, message).locator,
+      `${field} error should be shown`,
+    ).toBeVisible();
   },
 );

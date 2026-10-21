@@ -7,8 +7,10 @@ defineParameterType({
   transformer: (name: string) => REGISTER_FIELD_BY_NAME[name],
 });
 
+export type PasswordKind = 'valid' | 'wrong';
+
 defineParameterType({
   name: 'passwordKind',
   regexp: /valid|wrong/,
-  transformer: (kind: string) => kind,
+  transformer: (kind: string) => kind as PasswordKind,
 });
