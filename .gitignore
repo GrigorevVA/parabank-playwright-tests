@@ -1,0 +1,15 @@
+node_modules/
+test-results/
+playwright-report/
+blob-report/
+allure-results/
+allure-report/
+.features-gen/
+.auth/
+.env
+.playwright-mcp/
+
+# local working docs and Claude instructions
+CLAUDE.md
+.mcp.json
+docs/

@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "types": ["node"],
+    "paths": {
+      "@core/*": ["./core/*"],
+      "@app/*": ["./app/*"],
+      "@fixtures/*": ["./fixtures/*"]
+    }
+  },
+  "include": ["core", "app", "fixtures", "tests", "playwright.config.ts"]
+}
