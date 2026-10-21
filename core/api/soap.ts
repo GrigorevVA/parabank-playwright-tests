@@ -1,8 +1,8 @@
 import { XMLParser } from 'fast-xml-parser';
 
-export interface SoapFault {
+export type SoapFault = {
   Fault: { faultcode: string; faultstring: string };
-}
+};
 
 export type SoapParams = Record<string, string | number>;
 

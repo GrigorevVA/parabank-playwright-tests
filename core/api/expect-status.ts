@@ -1,8 +1,8 @@
 import { expect, type APIResponse } from '@playwright/test';
 
-export interface StatusCheckOptions {
+export type StatusCheckOptions = {
   soft?: boolean;
-}
+};
 
 export function expectStatus(
   response: APIResponse,

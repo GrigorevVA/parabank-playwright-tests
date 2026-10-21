@@ -4,7 +4,7 @@ import { getRequest } from '@core/request-holder';
 // ParaBank has no REST registration, so the HTML form endpoint is used
 export const REGISTER_URL = 'register.htm';
 
-export interface NewCustomer {
+export type NewCustomer = {
   firstName: string;
   lastName: string;
   street: string;
@@ -15,7 +15,7 @@ export interface NewCustomer {
   ssn: string;
   username: string;
   password: string;
-}
+};
 
 // the form POST fails with 500 without a session, GET opens one
 export function getRegister(): Promise<APIResponse> {

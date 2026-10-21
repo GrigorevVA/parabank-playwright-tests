@@ -1,9 +1,9 @@
 import type { APIResponse } from '@playwright/test';
 import { postSoap } from './parabank-soap';
 
-export interface TransferResponse {
+export type TransferResponse = {
   transferResponse: { transferReturn: string };
-}
+};
 
 export function soapTransfer(
   fromAccountId: number,
