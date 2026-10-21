@@ -12,4 +12,5 @@ allure-report/
 # local working docs and Claude instructions
 CLAUDE.md
 .mcp.json
+.claude/
 docs/
