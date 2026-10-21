@@ -24,6 +24,8 @@ npm test
 | `npm run test:bdd` | UI BDD scenarios |
 | `npm run typecheck` | type check |
 | `npm run report` | HTML report |
+| `npm run allure:generate` | Allure report from the last run (`allure-report/`) |
+| `npm run allure:open` | open the Allure report |
 
 ## Structure
 

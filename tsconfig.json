@@ -16,5 +16,5 @@
       "@fixtures/*": ["./fixtures/*"]
     }
   },
-  "include": ["core", "app", "fixtures", "tests", "playwright.config.ts"]
+  "include": ["core", "app", "fixtures", "tests", "playwright.config.ts", "allurerc.ts"]
 }
