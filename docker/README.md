@@ -1,4 +1,4 @@
 # docker
 
-- `Dockerfile`: образ для прогона тестов (на базе `mcr.microsoft.com/playwright`).
-- `docker-compose.yml`: поднимает ParaBank и контейнер с тестами.
+- `Dockerfile`: image for running the tests (based on `mcr.microsoft.com/playwright`).
+- `docker-compose.yml`: starts ParaBank and the test container.

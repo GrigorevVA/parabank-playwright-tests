@@ -1,11 +1,11 @@
 # tests
 
-Только тесты, без логики страниц.
+Tests only, no page logic.
 
 ```
 e2e/api/rest   REST
 e2e/api/soap   SOAP
 bdd/features   Gherkin
-bdd/steps      step definitions, BDD-фикстуры, parameter types
+bdd/steps      step definitions, BDD fixtures, parameter types
 ```
-`expect` всегда с сообщением. Проверяем то, что видит пользователь.
+`expect` always has a message. We check what the user sees.

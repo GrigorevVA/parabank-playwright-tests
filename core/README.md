@@ -1,10 +1,10 @@
 # core
 
-Ядро, не зависящее от приложения. Меняется редко.
+Application-independent core. Changes rarely.
 
-| Папка / файл | Что лежит |
+| Folder / file | Contents |
 |---|---|
 | `elements/` | `HtmlElement(locator, name)`, `Button`, `Input`, `Checkbox` |
-| `api/` | request holder, `authorizeRequest`, api assertions (soft/hard через options) |
-| `utils/` | `step()`, `TIMEOUT` (SHORT 5s, MEDIUM 10s, LONG 60s), env, logger, file utils, faker-генераторы |
+| `api/` | request holder, `authorizeRequest`, API assertions (soft/hard via options) |
+| `utils/` | `step()`, `TIMEOUT` (SHORT 5s, MEDIUM 10s, LONG 60s), env, logger, file utils, faker generators |
 | `page-holder.ts` | `setPage()` / `getPage()` |

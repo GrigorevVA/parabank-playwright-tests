@@ -1,3 +1,3 @@
 # GitHub Actions
 
-`tests.yml`: поднимает ParaBank как service container, запускает матрицу `project: [api, bdd]`, публикует Allure на GitHub Pages.
+`tests.yml`: starts ParaBank as a service container, runs the `project: [api, bdd]` matrix, publishes Allure to GitHub Pages.

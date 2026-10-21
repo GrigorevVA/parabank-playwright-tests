@@ -1,3 +1,3 @@
 # fixtures
 
-`base.fixture.ts`: только настройка фреймворка (page, request, auth). Данные конкретного теста создаются в `beforeEach`/`afterEach` спеки.
+`base.fixture.ts`: framework setup only (page, request, auth). Test-specific data is created in the spec's `beforeEach`/`afterEach`.

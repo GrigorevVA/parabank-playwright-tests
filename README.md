@@ -1,45 +1,45 @@
 # ParaBank Playwright tests
 
-Учебный фреймворк автотестов на Playwright + TypeScript для [ParaBank](https://parabank.parasoft.com/parabank), демо-банка от Parasoft.
+Training test automation framework on Playwright + TypeScript for [ParaBank](https://parabank.parasoft.com/parabank), a demo bank by Parasoft.
 
-Что покрываем: REST API, SOAP, UI через BDD (playwright-bdd).
-Стенд поднимается локально в Docker. Публичный сайт ограничивает частоту запросов (HTTP 429) и для прогонов не подходит.
+Coverage: REST API, SOAP, UI via BDD (playwright-bdd).
+The test environment runs locally in Docker. The public site rate-limits requests (HTTP 429) and is not suitable for test runs.
 
-> README будет дописан на шаге 12 (CI, отчёты, бейджи).
+> CI, reports and badges will be added to this README later.
 
-## Быстрый старт
+## Quick start
 
 ```powershell
-docker run -d --name parabank -p 8080:8080 parasoft/parabank
+docker run -d --name parabank -p 127.0.0.1:8080:8080 parasoft/parabank@sha256:f41126b4c1a293643ef86dfc2b29955c0d59e1dc992797f48f00298c68a717ab
 npm ci
 npx playwright install chromium
 copy .env.example .env
 npm test
 ```
 
-| Скрипт | Что делает |
+| Script | What it does |
 |---|---|
-| `npm test` | все тесты |
-| `npm run test:api` | REST и SOAP |
-| `npm run test:bdd` | BDD-сценарии UI |
-| `npm run typecheck` | проверка типов |
-| `npm run report` | HTML-отчёт |
+| `npm test` | all tests |
+| `npm run test:api` | REST and SOAP |
+| `npm run test:bdd` | UI BDD scenarios |
+| `npm run typecheck` | type check |
+| `npm run report` | HTML report |
 
-## Структура
+## Structure
 
 ```
-core/            ядро: holders, step(), обёртки элементов, проверки API, env, таймауты
+core/            core: holders, step(), element wrappers, API assertions, env, timeouts
 app/
-  pages/         страницы (static-классы)
-  components/    общие блоки (LeftMenu)
-  api/rest/      эндпоинты, builders, helpers
-  api/soap/      SOAP-вызовы
-  data/          DDT-наборы
+  pages/         pages (static classes)
+  components/    shared blocks (LeftMenu)
+  api/rest/      endpoints, builders, helpers
+  api/soap/      SOAP calls
+  data/          DDT data sets
 fixtures/        base.fixture.ts
 tests/
-  e2e/api/rest   REST-тесты
-  e2e/api/soap   SOAP-тесты
+  e2e/api/rest   REST tests
+  e2e/api/soap   SOAP tests
   bdd/           features + steps
-docker/          Dockerfile и compose
+docker/          Dockerfile and compose
 .github/         CI
 ```
