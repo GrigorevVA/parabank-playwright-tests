@@ -1,4 +1,5 @@
 import { expect } from '@playwright/test';
+import { buildCustomer } from '@app/api/rest/builders/customer-builder';
 import { fetchCustomerAccounts } from '@app/api/rest/helpers/account-helper';
 import { registerCustomer } from '@app/api/rest/helpers/customer-helper';
 import { LeftMenu } from '@app/components/left-menu';
@@ -44,6 +45,10 @@ When('I register as a new customer', async ({ newCustomer }) => {
 
 When('I register as a new customer with a mismatched password confirmation', async ({ newCustomer }) => {
   await RegisterPage.register(newCustomer, WRONG_PASSWORD);
+});
+
+When('I register another customer with the same username', async ({ newCustomer }) => {
+  await RegisterPage.register({ ...buildCustomer(), username: newCustomer.username });
 });
 
 When(

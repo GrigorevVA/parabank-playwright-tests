@@ -3,7 +3,9 @@ import type { NewAccountType } from '@app/api/rest/create-account';
 import { fetchAccount, openAccount } from '@app/api/rest/helpers/account-helper';
 import { LeftMenu } from '@app/components/left-menu';
 import { OPENING_DEPOSIT } from '@app/data/account-types';
+import { AccountActivityPage } from '@app/pages/account-activity-page';
 import { AccountsOverviewPage } from '@app/pages/accounts-overview-page';
+import { BillPayPage } from '@app/pages/bill-pay-page';
 import { OpenNewAccountPage } from '@app/pages/open-new-account-page';
 import { TransferFundsPage } from '@app/pages/transfer-funds-page';
 import { Given, Then, When } from './fixtures';
@@ -28,6 +30,29 @@ When('I go to Accounts Overview', async () => {
 When('I transfer ${int} to my second account', async ({ accounts }, amount: number) => {
   await LeftMenu.open('Transfer Funds');
   await TransferFundsPage.transfer(amount, accounts[0].id, accounts[1].id);
+});
+
+When('I pay a ${float} bill', async ({ accounts, payee }, amount: number) => {
+  await LeftMenu.open('Bill Pay');
+  await BillPayPage.payBill(payee, amount, accounts[0].id);
+});
+
+When('I open my account activity', async ({ accounts }) => {
+  await LeftMenu.open('Accounts Overview');
+  await AccountsOverviewPage.openAccount(String(accounts[0].id));
+});
+
+Then('I see the ${float} bill payment confirmation', async ({ accounts, payee }, amount: number) => {
+  await expect(BillPayPage.paymentResult().locator, 'Payment result should name payee, amount and account').toHaveText(
+    `Bill Payment to ${payee.name} in the amount of $${amount.toFixed(2)} from account ${accounts[0].id} was successful.`,
+  );
+});
+
+Then('I see the ${float} bill payment in the activity', async ({ payee }, amount: number) => {
+  await expect(
+    AccountActivityPage.transactionRow(`Bill Payment to ${payee.name}`).locator,
+    'Bill payment should appear in the account activity with its amount',
+  ).toContainText(`$${amount.toFixed(2)}`);
 });
 
 Then('I see the new account in the overview', async ({ accounts }) => {

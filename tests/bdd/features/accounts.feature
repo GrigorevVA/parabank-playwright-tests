@@ -14,6 +14,12 @@ Feature: Customer accounts
       | CHECKING |
       | SAVINGS  |
 
+  Scenario: Customer pays a bill
+    When I pay a $12.50 bill
+    Then I see the $12.50 bill payment confirmation
+    When I open my account activity
+    Then I see the $12.50 bill payment in the activity
+
   Scenario: Customer transfers money to own account
     Given I have a second SAVINGS account
     When I transfer $25 to my second account

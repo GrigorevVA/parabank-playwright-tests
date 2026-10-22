@@ -11,9 +11,17 @@ The tests run against a local ParaBank in Docker. The public site rate-limits re
 
 | Suite | Scenarios | Tests |
 |---|---|---|
-| REST | login (valid / wrong password), accounts (new customer, open CHECKING / SAVINGS, unknown account), transfer, loan requests (approved / denied, data-driven) | 11 |
+| REST | login (valid / wrong password), customer (read, update, unknown customer), accounts (new customer, open CHECKING / SAVINGS, unknown account), transfer, transactions (bill payment, read by id, find by amount, unknown transaction), loan requests (approved / denied, data-driven) | 18 |
 | SOAP | login (valid / fault), accounts (new customer, fault for unknown account), transfer | 5 |
-| UI (BDD) | registration (success, password mismatch, required fields), login (valid, wrong password, log out), accounts (open CHECKING / SAVINGS, transfer funds) | 11 |
+| UI (BDD) | registration (success, taken username, password mismatch, required fields), login (valid, wrong password, log out), profile update, accounts (open CHECKING / SAVINGS, bill payment, transfer funds) | 14 |
+
+Tests follow CRUD per entity: every create or update is confirmed by a separate read, through the API or by reopening the page in the UI.
+
+| Entity | Create | Read | Update | Delete |
+|---|---|---|---|---|
+| Customer | registration, taken username | by id, unknown id | REST update, Update Profile form | not supported by ParaBank (405) |
+| Account | open CHECKING / SAVINGS | by id, customer accounts, overview | balance via transfer and bill payment | not supported |
+| Transaction | bill payment, transfer | by account, by id, by amount, account activity | not supported | not supported |
 
 Every test registers its own customer with Faker data, so tests do not share state.
 
