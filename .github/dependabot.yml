@@ -1,0 +1,28 @@
+version: 2
+
+# new versions are proposed only after 14 days, like the rule for manual updates.
+# Updated by hand, not by Dependabot:
+# - Playwright: package.json, docker/Dockerfile and container.image in tests.yml must use the same version;
+# - ParaBank image digest (docker-compose.yml, tests.yml): the image has no version tags to track.
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 14
+    ignore:
+      - dependency-name: '@playwright/test'
+    groups:
+      npm:
+        patterns: ['*']
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 14
+    groups:
+      actions:
+        patterns: ['*']
