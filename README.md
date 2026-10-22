@@ -10,8 +10,8 @@ The test environment runs locally in Docker. The public site rate-limits request
 ## Quick start
 
 ```powershell
-docker run -d --name parabank -p 127.0.0.1:8080:8080 parasoft/parabank@sha256:f41126b4c1a293643ef86dfc2b29955c0d59e1dc992797f48f00298c68a717ab
 npm ci
+npm run stand:up
 npx playwright install chromium
 copy .env.example .env
 npm test
@@ -19,7 +19,10 @@ npm test
 
 | Script | What it does |
 |---|---|
+| `npm run stand:up` | start ParaBank in Docker (`127.0.0.1:8080`) and wait until it is healthy |
+| `npm run stand:down` | stop and remove the stand |
 | `npm test` | all tests |
+| `npm run test:docker` | all tests in a container against the Docker stand, results in `allure-results/` |
 | `npm run test:api` | REST and SOAP |
 | `npm run test:bdd` | UI BDD scenarios |
 | `npm run typecheck` | type check |

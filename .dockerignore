@@ -1,0 +1,15 @@
+.git
+node_modules
+.features-gen
+test-results
+playwright-report
+blob-report
+allure-results
+allure-report
+.auth
+.env
+.playwright-mcp
+.claude
+.mcp.json
+CLAUDE.md
+docs
