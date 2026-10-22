@@ -3,28 +3,27 @@ import { Input } from '@core/elements/input';
 import { getPage } from '@core/page-holder';
 import { step } from '@core/utils/step';
 import type { NewCustomer } from '../api/rest/register';
+import { formRow } from '../components/form-row';
 import {
   REGISTER_FIELD_LABELS,
   REGISTER_SUCCESS_MESSAGE,
   type RegisterField,
 } from '../data/register-fields';
 
-// labels sit in a neighbour cell, so fields are found by table row
-const formRow = (label: string) =>
-  getPage().locator('#customerForm').getByRole('row').filter({ hasText: label });
+const registerFormRow = (label: string) => formRow(label, getPage().locator('#customerForm'));
 
 export class RegisterPage {
   static readonly field = (field: RegisterField) =>
-    new Input(formRow(REGISTER_FIELD_LABELS[field]).locator('input'), `${field} input`);
+    new Input(registerFormRow(REGISTER_FIELD_LABELS[field]).locator('input'), `${field} input`);
 
   static readonly confirmInput = () =>
-    new Input(formRow('Confirm:').locator('input'), 'Confirm input');
+    new Input(registerFormRow('Confirm:').locator('input'), 'Confirm input');
 
   static readonly fieldError = (field: RegisterField, message: string) =>
-    new HtmlElement(formRow(REGISTER_FIELD_LABELS[field]).getByText(message), `${field} error`);
+    new HtmlElement(registerFormRow(REGISTER_FIELD_LABELS[field]).getByText(message), `${field} error`);
 
   static readonly confirmError = (message: string) =>
-    new HtmlElement(formRow('Confirm:').getByText(message), 'Confirm error');
+    new HtmlElement(registerFormRow('Confirm:').getByText(message), 'Confirm error');
 
   static readonly registerButton = () =>
     new HtmlElement(getPage().getByRole('button', { name: 'Register' }), 'Register button');

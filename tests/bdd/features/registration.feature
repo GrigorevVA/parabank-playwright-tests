@@ -11,6 +11,11 @@ Feature: Customer registration
     When I register as a new customer with a mismatched password confirmation
     Then I see the "Passwords did not match." error under password confirmation
 
+  Scenario: Registration fails for a taken username
+    Given a registered customer
+    When I register another customer with the same username
+    Then I see the "This username already exists." error under Username
+
   Scenario Outline: Registration fails without <field>
     When I register as a new customer without <field>
     Then I see the "<error>" error under <field>

@@ -19,6 +19,17 @@ export const REGISTER_FIELD_LABELS: Record<RegisterField, string> = {
   password: 'Password:',
 };
 
+// Update Profile shows the contact fields only, with the same labels
+export const PROFILE_FIELDS: readonly RegisterField[] = [
+  'firstName',
+  'lastName',
+  'street',
+  'city',
+  'state',
+  'zipCode',
+  'phoneNumber',
+];
+
 // names used in feature files
 export const REGISTER_FIELD_BY_NAME: Record<string, RegisterField> = {
   'First Name': 'firstName',
