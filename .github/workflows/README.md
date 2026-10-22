@@ -5,4 +5,4 @@
 - `tests (api)`, `tests (bdd)`: matrix jobs in the official Playwright image (same digest as `docker/Dockerfile`), each with its own ParaBank service container. Upload `allure-results-<project>` and, on failure, `playwright-report-<project>`.
 - `report`: merges the results of both jobs and uploads the `allure-report` artifact.
 
-Third-party actions are pinned by commit SHA, the workflow token is read-only.
+npm downloads are cached by the `package-lock.json` hash. Third-party actions are pinned by commit SHA, the workflow token is read-only.
