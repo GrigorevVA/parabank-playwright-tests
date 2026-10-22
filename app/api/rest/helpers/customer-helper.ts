@@ -10,7 +10,7 @@ export function registerCustomer(
   newCustomer: NewCustomer,
   options?: StatusCheckOptions,
 ): Promise<Customer> {
-  return step(`Register customer ${newCustomer.username} and get profile`, async () => {
+  return step(`Register customer ${newCustomer.username} to get profile`, async () => {
     expectStatus(await getRegister(), 200, 'Open register form', options);
     const registerResponse = await postRegister(newCustomer);
     expectStatus(registerResponse, 200, 'Submit register form', options);

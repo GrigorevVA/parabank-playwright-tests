@@ -11,7 +11,7 @@ The tests run against a local ParaBank in Docker. The public site rate-limits re
 
 | Suite | Scenarios | Tests |
 |---|---|---|
-| REST | login (valid / wrong password), customer (read, update, unknown customer), accounts (new customer, open CHECKING / SAVINGS, unknown account), transfer, transactions (bill payment, read by id, find by amount, unknown transaction), loan requests (approved / denied, data-driven) | 18 |
+| REST | login (valid / wrong password), customer (read, update, unknown customer), accounts (new customer, open CHECKING / SAVINGS, unknown account), balance (deposit, withdrawal, unknown account), transfer, transactions (bill payment, read by id, find by amount, unknown transaction), positions (buy, partial sale, full sale, unknown position), loan requests (approved / denied, data-driven), known defects (4, expected to fail) | 30 |
 | SOAP | login (valid / fault), accounts (new customer, fault for unknown account), transfer | 5 |
 | UI (BDD) | registration (success, taken username, password mismatch, required fields), login (valid, wrong password, log out), profile update, accounts (open CHECKING / SAVINGS, bill payment, transfer funds) | 14 |
 
@@ -20,8 +20,20 @@ Tests follow CRUD per entity: every create or update is confirmed by a separate 
 | Entity | Create | Read | Update | Delete |
 |---|---|---|---|---|
 | Customer | registration, taken username | by id, unknown id | REST update, Update Profile form | not supported by ParaBank (405) |
-| Account | open CHECKING / SAVINGS | by id, customer accounts, overview | balance via transfer and bill payment | not supported |
-| Transaction | bill payment, transfer | by account, by id, by amount, account activity | not supported | not supported |
+| Account | open CHECKING / SAVINGS | by id, customer accounts, overview | balance via deposit, withdrawal, transfer and bill payment | not supported |
+| Transaction | bill payment, transfer, deposit, withdrawal | by account, by id, by amount, account activity | not supported | not supported |
+| Position (shares) | buy | by id, customer positions | partial sale | full sale |
+
+## Known defects
+
+[`known-defects.spec.ts`](tests/e2e/api/rest/known-defects.spec.ts) describes the correct behaviour for four ParaBank defects and marks the tests with `test.fail()`, so CI stays green while the defects stay visible in the report:
+
+- withdrawal above the balance is accepted (the balance goes negative);
+- a negative deposit is accepted;
+- buying shares above the balance is accepted;
+- selling more shares than the position has is accepted (shares go negative).
+
+When ParaBank fixes a defect, Playwright reports "expected to fail, but passed" and the `test.fail()` mark has to be removed.
 
 Every test registers its own customer with Faker data, so tests do not share state.
 
