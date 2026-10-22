@@ -109,10 +109,10 @@ jobs:
           path: allure-report/
           retention-days: 7
 
-  # the only job with write access; runs for main only, without cache
+  # the only job with write access; runs for main only (push or manual run), never for PRs, without cache
   publish:
     needs: report
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    if: ${{ github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
