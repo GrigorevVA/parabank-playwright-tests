@@ -1,11 +1,14 @@
 # ParaBank Playwright tests
 
+[![tests](https://github.com/GrigorevVA/parabank-playwright-tests/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/GrigorevVA/parabank-playwright-tests/actions/workflows/tests.yml)
+[![Allure report](https://img.shields.io/badge/Allure-report-orange)](https://grigorevva.github.io/parabank-playwright-tests/)
+
 Training test automation framework on Playwright + TypeScript for [ParaBank](https://parabank.parasoft.com/parabank), a demo bank by Parasoft.
 
 Coverage: REST API, SOAP, UI via BDD (playwright-bdd).
 The test environment runs locally in Docker. The public site rate-limits requests (HTTP 429) and is not suitable for test runs.
 
-> CI, reports and badges will be added to this README later.
+CI runs the API and BDD suites in parallel on every pull request and push to `main`; the [Allure report](https://grigorevva.github.io/parabank-playwright-tests/) from `main` is published to GitHub Pages with run history.
 
 ## Quick start
 
