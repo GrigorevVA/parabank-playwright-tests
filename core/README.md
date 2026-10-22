@@ -4,7 +4,7 @@ Application-independent core. Changes rarely.
 
 | Folder / file | Contents |
 |---|---|
-| `elements/` | `HtmlElement(locator, name)`, `Button`, `Input`, `Checkbox` |
-| `api/` | request holder, `authorizeRequest`, API assertions (soft/hard via options) |
-| `utils/` | `step()`, `TIMEOUT` (SHORT 5s, MEDIUM 10s, LONG 60s), env, logger, file utils, faker generators |
-| `page-holder.ts` | `setPage()` / `getPage()` |
+| `elements/` | `HtmlElement(locator, name)` and subclasses for real HTML behaviour: `Input`, `Select` |
+| `api/` | `expectStatus` (soft / hard via options), SOAP envelope builder and response parser |
+| `utils/` | `step()`, `TIMEOUT` (SHORT 5s, MEDIUM 10s, LONG 60s), `ENV` |
+| `page-holder.ts`, `request-holder.ts` | `setPage()` / `getPage()`, `setRequest()` / `getRequest()` |
