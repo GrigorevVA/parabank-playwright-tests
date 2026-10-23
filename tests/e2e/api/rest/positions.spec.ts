@@ -9,11 +9,13 @@ import { getPosition } from '@app/api/rest/position';
 import { postSellPosition } from '@app/api/rest/sell-position';
 import { UNKNOWN_POSITION_ID } from '@app/data/negative-data';
 import { ACME_ORDER, SALE_PRICE } from '@app/data/position-orders';
+import { allureLabels } from '@core/utils/allure-labels';
+import { EPIC } from '@app/data/report-labels';
 
 const SOLD_SHARES = 4;
 
 // CRUD: buy creates a position, partial sale updates it, full sale deletes it
-test.describe('ParaBank REST: positions', () => {
+test.describe('ParaBank REST: positions', allureLabels(EPIC.REST, 'Positions', 'normal'), () => {
   let checking: Account;
 
   test.beforeEach(async () => {

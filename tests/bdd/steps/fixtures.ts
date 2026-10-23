@@ -30,4 +30,4 @@ export const test = mergeTests(bddTest, baseTest).extend<{
   },
 });
 
-export const { Given, When, Then } = createBdd(test);
+export const { Given, When, Then, Before } = createBdd(test);

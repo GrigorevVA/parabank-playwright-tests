@@ -1,3 +1,4 @@
+@severity:critical
 Feature: Customer login
 
   Background:

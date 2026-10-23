@@ -13,8 +13,10 @@ import {
   type GetAccountsResponse,
 } from '@app/api/soap/get-accounts';
 import { UNKNOWN_ACCOUNT_ID } from '@app/data/negative-data';
+import { allureLabels } from '@core/utils/allure-labels';
+import { EPIC } from '@app/data/report-labels';
 
-test.describe('ParaBank SOAP: accounts', () => {
+test.describe('ParaBank SOAP: accounts', allureLabels(EPIC.SOAP, 'Accounts', 'normal'), () => {
   let customer: Customer;
 
   test.beforeEach(async () => {

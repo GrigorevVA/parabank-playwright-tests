@@ -5,8 +5,10 @@ import { registerCustomer } from '@app/api/rest/helpers/customer-helper';
 import type { NewCustomer } from '@app/api/rest/register';
 import { soapLogin, type LoginResponse } from '@app/api/soap/login';
 import { WRONG_PASSWORD } from '@app/data/negative-data';
+import { allureLabels } from '@core/utils/allure-labels';
+import { EPIC } from '@app/data/report-labels';
 
-test.describe('ParaBank SOAP: login', () => {
+test.describe('ParaBank SOAP: login', allureLabels(EPIC.SOAP, 'Login', 'critical'), () => {
   let newCustomer: NewCustomer;
 
   test.beforeEach(async () => {

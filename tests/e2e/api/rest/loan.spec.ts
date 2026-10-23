@@ -5,8 +5,10 @@ import { fetchAccount, fetchCustomerAccounts } from '@app/api/rest/helpers/accou
 import { registerCustomer } from '@app/api/rest/helpers/customer-helper';
 import { postRequestLoan, type LoanResponse } from '@app/api/rest/request-loan';
 import { APPROVED_LOANS, DENIED_LOANS } from '@app/data/loan-requests';
+import { allureLabels } from '@core/utils/allure-labels';
+import { EPIC } from '@app/data/report-labels';
 
-test.describe('ParaBank REST: loan', () => {
+test.describe('ParaBank REST: loan', allureLabels(EPIC.REST, 'Loan', 'normal'), () => {
   let checking: Account;
 
   test.beforeEach(async () => {
