@@ -28,7 +28,7 @@ export default defineConfig({
   reporter: [
     ['list'],
     ['html', { open: 'never' }],
-    // project names (api, bdd) become parent suites in the Allure tree
+    // labels (epic, feature, severity) come from allureLabels() and the BDD hook, see allurerc.ts
     [
       'allure-playwright',
       {
