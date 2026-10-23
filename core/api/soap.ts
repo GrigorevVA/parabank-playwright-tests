@@ -6,6 +6,18 @@ export type SoapFault = {
 
 export type SoapParams = Record<string, string | number>;
 
+const XML_ENTITIES: Record<string, string> = {
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": '&apos;',
+};
+
+// generated data may contain "&" or "<", which would break the envelope
+const escapeXml = (value: string | number): string =>
+  String(value).replace(/[&<>"']/g, (char) => XML_ENTITIES[char]);
+
 // service uses qualified elements, so every child gets the service prefix
 export function buildSoapEnvelope(
   namespace: string,
@@ -13,7 +25,7 @@ export function buildSoapEnvelope(
   params: SoapParams,
 ): string {
   const body = Object.entries(params)
-    .map(([name, value]) => `<ser:${name}>${value}</ser:${name}>`)
+    .map(([name, value]) => `<ser:${name}>${escapeXml(value)}</ser:${name}>`)
     .join('');
   return (
     `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="${namespace}">` +
