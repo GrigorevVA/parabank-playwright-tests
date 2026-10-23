@@ -26,8 +26,14 @@ test.describe('ParaBank SOAP: accounts', () => {
       await response.text(),
       ACCOUNT_LIST_TAGS,
     );
-    expect(getAccountsResponse.account, 'New customer should have exactly one account').toHaveLength(1);
-    expect(getAccountsResponse.account[0], 'First account should be CHECKING of this customer').toMatchObject({
+    expect(
+      getAccountsResponse.account,
+      'New customer should have exactly one account',
+    ).toHaveLength(1);
+    expect(
+      getAccountsResponse.account[0],
+      'First account should be CHECKING of this customer',
+    ).toMatchObject({
       customerId: String(customer.id),
       type: 'CHECKING',
     });

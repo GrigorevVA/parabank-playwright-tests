@@ -11,10 +11,16 @@ export class UpdateProfilePage {
     new Input(formRow(REGISTER_FIELD_LABELS[field]).locator('input'), `${field} input`);
 
   static readonly updateProfileButton = () =>
-    new HtmlElement(getPage().getByRole('button', { name: 'Update Profile' }), 'Update Profile button');
+    new HtmlElement(
+      getPage().getByRole('button', { name: 'Update Profile' }),
+      'Update Profile button',
+    );
 
   static readonly profileUpdatedTitle = () =>
-    new HtmlElement(getPage().getByRole('heading', { name: 'Profile Updated' }), 'Profile Updated title');
+    new HtmlElement(
+      getPage().getByRole('heading', { name: 'Profile Updated' }),
+      'Profile Updated title',
+    );
 
   static async updateProfile(customer: NewCustomer): Promise<void> {
     await step(`Update profile to ${customer.firstName} ${customer.lastName}`, async () => {

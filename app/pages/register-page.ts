@@ -20,7 +20,10 @@ export class RegisterPage {
     new Input(registerFormRow('Confirm:').locator('input'), 'Confirm input');
 
   static readonly fieldError = (field: RegisterField, message: string) =>
-    new HtmlElement(registerFormRow(REGISTER_FIELD_LABELS[field]).getByText(message), `${field} error`);
+    new HtmlElement(
+      registerFormRow(REGISTER_FIELD_LABELS[field]).getByText(message),
+      `${field} error`,
+    );
 
   static readonly confirmError = (message: string) =>
     new HtmlElement(registerFormRow('Confirm:').getByText(message), 'Confirm error');
@@ -29,7 +32,10 @@ export class RegisterPage {
     new HtmlElement(getPage().getByRole('button', { name: 'Register' }), 'Register button');
 
   static readonly welcomeTitle = (username: string) =>
-    new HtmlElement(getPage().getByRole('heading', { name: `Welcome ${username}` }), 'Welcome title');
+    new HtmlElement(
+      getPage().getByRole('heading', { name: `Welcome ${username}` }),
+      'Welcome title',
+    );
 
   static readonly successMessage = () =>
     new HtmlElement(getPage().getByText(REGISTER_SUCCESS_MESSAGE), 'Success message');

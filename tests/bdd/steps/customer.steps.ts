@@ -43,9 +43,12 @@ When('I register as a new customer', async ({ newCustomer }) => {
   await RegisterPage.register(newCustomer);
 });
 
-When('I register as a new customer with a mismatched password confirmation', async ({ newCustomer }) => {
-  await RegisterPage.register(newCustomer, WRONG_PASSWORD);
-});
+When(
+  'I register as a new customer with a mismatched password confirmation',
+  async ({ newCustomer }) => {
+    await RegisterPage.register(newCustomer, WRONG_PASSWORD);
+  },
+);
 
 When('I register another customer with the same username', async ({ newCustomer }) => {
   await RegisterPage.register({ ...buildCustomer(), username: newCustomer.username });
@@ -81,11 +84,17 @@ Then('I see the welcome message for the new customer', async ({ newCustomer }) =
     RegisterPage.welcomeTitle(newCustomer.username).locator,
     'Welcome title should name the new customer',
   ).toBeVisible();
-  await expect(RegisterPage.successMessage().locator, 'Success message should be shown').toBeVisible();
+  await expect(
+    RegisterPage.successMessage().locator,
+    'Success message should be shown',
+  ).toBeVisible();
 });
 
 Then('I see the {string} error under password confirmation', async ({}, message: string) => {
-  await expect(RegisterPage.confirmError(message).locator, 'Confirm error should be shown').toBeVisible();
+  await expect(
+    RegisterPage.confirmError(message).locator,
+    'Confirm error should be shown',
+  ).toBeVisible();
 });
 
 Then(

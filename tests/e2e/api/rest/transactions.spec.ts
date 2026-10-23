@@ -59,7 +59,9 @@ test.describe('ParaBank REST: transactions', () => {
     const response = await getTransaction(payment!.id);
 
     expect(response.status(), 'Get transaction should return 200').toBe(200);
-    expect(await response.json(), 'Transaction should match the account transaction').toEqual(payment);
+    expect(await response.json(), 'Transaction should match the account transaction').toEqual(
+      payment,
+    );
   });
 
   test('Transactions can be found by amount', async () => {

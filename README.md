@@ -39,7 +39,7 @@ Every test registers its own customer with Faker data, so tests do not share sta
 
 ## Stack
 
-Playwright, TypeScript, [playwright-bdd](https://github.com/vitalets/playwright-bdd), Faker, fast-xml-parser, Allure 3, Docker, GitHub Actions.
+Playwright, TypeScript 6, [playwright-bdd](https://github.com/vitalets/playwright-bdd), Faker, fast-xml-parser, Allure 3, ESLint (typescript-eslint, eslint-plugin-playwright), Prettier, Docker, GitHub Actions.
 
 ## Quick start
 
@@ -62,6 +62,8 @@ npm test
 | `npm run test:bdd` | UI BDD scenarios |
 | `npm run test:docker` | all tests in a container against the Docker stand, results in `allure-results/` |
 | `npm run typecheck` | type check |
+| `npm run lint` | ESLint: TypeScript, Playwright and project code rules |
+| `npm run format` / `format:check` | Prettier: format the code / check the format |
 | `npm run report` | Playwright HTML report |
 | `npm run allure:generate` | Allure report from the last run (`allure-report/`) |
 | `npm run allure:open` | open the Allure report |
@@ -73,17 +75,19 @@ npm test
 - **Element wrappers** (`HtmlElement`, `Input`, `Select`) wrap every action in a named step, so reports read as user actions: `Fill Amount input`, `Click Transfer button`.
 - **API layer:** one file per endpoint (URL, call and types), builders only build data, helpers call the endpoint, check success and return JSON. Soft or hard checks are chosen with an options argument.
 - **BDD:** declarative use-case steps, custom parameter types (`{accountType}`, `{registerField}`), Scenario Outlines for data sets. API calls in UI scenarios are used only to prepare data.
+- **Linting** turns review rules into errors: `expect` without a message, `waitForTimeout`, `waitForURL` / `waitForResponse`, a missing `await`, `test.only` / `test.skip`.
 - **Checks** always carry a message. UI checks verify what the user sees (visible elements and text), API checks verify status codes and response bodies.
 
 ## CI and reports
 
 [`tests.yml`](.github/workflows/tests.yml) runs on every pull request and push to `main`:
 
+- `lint` runs the type check, ESLint and the Prettier check;
 - `tests (api)` and `tests (bdd)` run in parallel in the official Playwright image, each with its own ParaBank service container;
 - `report` merges the results into one Allure report;
 - on `main`, `publish` deploys the report to [GitHub Pages](https://grigorevva.github.io/parabank-playwright-tests/) with run history.
 
-Pull requests to `main` require both test jobs to pass. Actions and images are pinned by SHA / digest, and only the publish job has write permissions.
+Pull requests to `main` require `lint` and both test jobs to pass. Actions and images are pinned by SHA / digest, and only the publish job has write permissions.
 
 ## Stand quirks handled by the framework
 

@@ -1,0 +1,9 @@
+package-lock.json
+.features-gen/
+test-results/
+playwright-report/
+blob-report/
+allure-results/
+allure-report/
+docs/
+*.md

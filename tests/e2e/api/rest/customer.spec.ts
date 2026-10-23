@@ -30,7 +30,11 @@ test.describe('ParaBank REST: customer', () => {
   });
 
   test('Customer profile can be updated', async () => {
-    const update = { ...buildCustomer(), username: newCustomer.username, password: newCustomer.password };
+    const update = {
+      ...buildCustomer(),
+      username: newCustomer.username,
+      password: newCustomer.password,
+    };
 
     const response = await postUpdateCustomer(customer.id, update);
 
@@ -38,12 +42,14 @@ test.describe('ParaBank REST: customer', () => {
     expect(await response.text(), 'Update should confirm the operation').toBe(
       'Successfully updated customer profile',
     );
-    expect(await fetchCustomer(customer.id), 'Customer should have the updated data').toMatchObject({
-      firstName: update.firstName,
-      lastName: update.lastName,
-      address: { street: update.street, city: update.city, zipCode: update.zipCode },
-      phoneNumber: update.phoneNumber,
-    });
+    expect(await fetchCustomer(customer.id), 'Customer should have the updated data').toMatchObject(
+      {
+        firstName: update.firstName,
+        lastName: update.lastName,
+        address: { street: update.street, city: update.city, zipCode: update.zipCode },
+        phoneNumber: update.phoneNumber,
+      },
+    );
   });
 
   test('Unknown customer is not found', async () => {
