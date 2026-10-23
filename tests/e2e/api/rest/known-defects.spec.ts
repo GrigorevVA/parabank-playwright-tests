@@ -31,7 +31,9 @@ test.describe('ParaBank REST: known defects', () => {
       const response = await postWithdraw(checking.id, checking.balance + AMOUNT);
 
       expect(response.status(), 'Overdraft should return 400').toBe(400);
-      expect((await fetchAccount(checking.id)).balance, 'Balance should not change').toBe(checking.balance);
+      expect((await fetchAccount(checking.id)).balance, 'Balance should not change').toBe(
+        checking.balance,
+      );
     },
   );
 
@@ -44,13 +46,20 @@ test.describe('ParaBank REST: known defects', () => {
       const response = await postDeposit(checking.id, -AMOUNT);
 
       expect(response.status(), 'Negative deposit should return 400').toBe(400);
-      expect((await fetchAccount(checking.id)).balance, 'Balance should not change').toBe(checking.balance);
+      expect((await fetchAccount(checking.id)).balance, 'Balance should not change').toBe(
+        checking.balance,
+      );
     },
   );
 
   test(
     'Buying shares above the balance is rejected',
-    { annotation: { type: 'defect', description: 'ParaBank buys positions without a balance check' } },
+    {
+      annotation: {
+        type: 'defect',
+        description: 'ParaBank buys positions without a balance check',
+      },
+    },
     async () => {
       test.fail();
       const order = { ...ACME_ORDER, pricePerShare: checking.balance };
@@ -58,13 +67,20 @@ test.describe('ParaBank REST: known defects', () => {
       const response = await postBuyPosition(checking.customerId, checking.id, order);
 
       expect(response.status(), 'Buying above the balance should return 400').toBe(400);
-      expect((await fetchAccount(checking.id)).balance, 'Balance should not change').toBe(checking.balance);
+      expect((await fetchAccount(checking.id)).balance, 'Balance should not change').toBe(
+        checking.balance,
+      );
     },
   );
 
   test(
     'Selling more shares than owned is rejected',
-    { annotation: { type: 'defect', description: 'ParaBank sells more shares than the position has' } },
+    {
+      annotation: {
+        type: 'defect',
+        description: 'ParaBank sells more shares than the position has',
+      },
+    },
     async () => {
       const [position] = await buyPosition(checking.customerId, checking.id, ACME_ORDER);
       // marked after the setup, so a failed purchase is a real failure

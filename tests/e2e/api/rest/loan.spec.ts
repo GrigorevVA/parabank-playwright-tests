@@ -45,10 +45,9 @@ test.describe('ParaBank REST: loan', () => {
         message: loan.message,
         accountId: null,
       });
-      expect(
-        (await fetchAccount(checking.id)).balance,
-        'Source balance should not change',
-      ).toBe(checking.balance);
+      expect((await fetchAccount(checking.id)).balance, 'Source balance should not change').toBe(
+        checking.balance,
+      );
     });
   }
 });

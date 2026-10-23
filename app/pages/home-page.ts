@@ -5,7 +5,10 @@ import { step } from '@core/utils/step';
 
 export class HomePage {
   static readonly customerLoginTitle = () =>
-    new HtmlElement(getPage().getByRole('heading', { name: 'Customer Login' }), 'Customer Login title');
+    new HtmlElement(
+      getPage().getByRole('heading', { name: 'Customer Login' }),
+      'Customer Login title',
+    );
 
   // inputs have no labels, only name attributes
   static readonly usernameInput = () =>

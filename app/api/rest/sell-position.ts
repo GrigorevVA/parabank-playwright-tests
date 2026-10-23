@@ -2,7 +2,8 @@ import type { APIResponse } from '@playwright/test';
 import { getRequest } from '@core/request-holder';
 import { JSON_HEADERS } from './json-headers';
 
-const sellPositionUrl = (customerId: number): string => `services/bank/customers/${customerId}/sellPosition`;
+const sellPositionUrl = (customerId: number): string =>
+  `services/bank/customers/${customerId}/sellPosition`;
 
 export type PositionSale = {
   positionId: number;

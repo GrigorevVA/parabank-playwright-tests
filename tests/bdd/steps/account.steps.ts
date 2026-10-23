@@ -42,11 +42,17 @@ When('I open my account activity', async ({ accounts }) => {
   await AccountsOverviewPage.openAccount(String(accounts[0].id));
 });
 
-Then('I see the ${float} bill payment confirmation', async ({ accounts, payee }, amount: number) => {
-  await expect(BillPayPage.paymentResult().locator, 'Payment result should name payee, amount and account').toHaveText(
-    `Bill Payment to ${payee.name} in the amount of $${amount.toFixed(2)} from account ${accounts[0].id} was successful.`,
-  );
-});
+Then(
+  'I see the ${float} bill payment confirmation',
+  async ({ accounts, payee }, amount: number) => {
+    await expect(
+      BillPayPage.paymentResult().locator,
+      'Payment result should name payee, amount and account',
+    ).toHaveText(
+      `Bill Payment to ${payee.name} in the amount of $${amount.toFixed(2)} from account ${accounts[0].id} was successful.`,
+    );
+  },
+);
 
 Then('I see the ${float} bill payment in the activity', async ({ payee }, amount: number) => {
   await expect(

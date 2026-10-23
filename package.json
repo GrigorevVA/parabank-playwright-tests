@@ -5,6 +5,9 @@
   "description": "Playwright + TypeScript autotests for ParaBank",
   "scripts": {
     "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "bddgen": "bddgen",
     "test": "bddgen && playwright test",
     "test:api": "playwright test --project=api",
@@ -17,17 +20,23 @@
     "test:docker": "docker compose -f docker/docker-compose.yml run --rm --build tests"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=20.19"
   },
   "devDependencies": {
+    "@eslint/js": "10.0.1",
     "@faker-js/faker": "^10.6.0",
     "@playwright/test": "1.64.1",
     "@types/node": "^26.6.5",
     "allure": "3.20.1",
     "allure-playwright": "3.13.0",
     "dotenv": "^18.0.8",
+    "eslint": "10.12.0",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-playwright": "2.12.1",
     "fast-xml-parser": "^5.11.2",
     "playwright-bdd": "^9.2.1",
-    "typescript": "^7.0.2"
+    "prettier": "3.9.9",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.1"
   }
 }

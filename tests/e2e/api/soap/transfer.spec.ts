@@ -33,11 +33,13 @@ test.describe('ParaBank SOAP: transfer', () => {
     expect(transferResponse.transferReturn, 'Transfer should confirm the operation').toBe(
       `Successfully transferred $${TRANSFER_AMOUNT} from account #${checking.id} to account #${savings.id}`,
     );
-    expect(Number((await fetchSoapAccount(checking.id)).balance), 'Source balance should decrease').toBe(
-      checking.balance - TRANSFER_AMOUNT,
-    );
-    expect(Number((await fetchSoapAccount(savings.id)).balance), 'Target balance should increase').toBe(
-      savings.balance + TRANSFER_AMOUNT,
-    );
+    expect(
+      Number((await fetchSoapAccount(checking.id)).balance),
+      'Source balance should decrease',
+    ).toBe(checking.balance - TRANSFER_AMOUNT);
+    expect(
+      Number((await fetchSoapAccount(savings.id)).balance),
+      'Target balance should increase',
+    ).toBe(savings.balance + TRANSFER_AMOUNT);
   });
 });

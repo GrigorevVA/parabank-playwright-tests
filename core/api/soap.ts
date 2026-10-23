@@ -7,7 +7,11 @@ export type SoapFault = {
 export type SoapParams = Record<string, string | number>;
 
 // service uses qualified elements, so every child gets the service prefix
-export function buildSoapEnvelope(namespace: string, operation: string, params: SoapParams): string {
+export function buildSoapEnvelope(
+  namespace: string,
+  operation: string,
+  params: SoapParams,
+): string {
   const body = Object.entries(params)
     .map(([name, value]) => `<ser:${name}>${value}</ser:${name}>`)
     .join('');

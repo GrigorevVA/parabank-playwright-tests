@@ -4,7 +4,7 @@ services:
   parabank:
     image: parasoft/parabank@sha256:f41126b4c1a293643ef86dfc2b29955c0d59e1dc992797f48f00298c68a717ab
     ports:
-      - "127.0.0.1:8080:8080"
+      - '127.0.0.1:8080:8080'
     # the image has no curl or wget, bash /dev/tcp is enough for a plain HTTP check;
     # a fresh database answers 302 to initializeDB.htm, the app is up either way
     healthcheck:

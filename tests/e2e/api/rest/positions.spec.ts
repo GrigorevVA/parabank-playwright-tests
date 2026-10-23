@@ -34,12 +34,14 @@ test.describe('ParaBank REST: positions', () => {
       purchasePrice: ACME_ORDER.pricePerShare,
     };
     expect(position, 'Buy should answer with the new position').toMatchObject(expected);
-    expect(await (await getPosition(position.positionId)).json(), 'Position should be readable by id').toEqual(
-      position,
-    );
-    expect(await fetchCustomerPositions(checking.customerId), 'Customer should own the position').toEqual([
-      position,
-    ]);
+    expect(
+      await (await getPosition(position.positionId)).json(),
+      'Position should be readable by id',
+    ).toEqual(position);
+    expect(
+      await fetchCustomerPositions(checking.customerId),
+      'Customer should own the position',
+    ).toEqual([position]);
     expect((await fetchAccount(checking.id)).balance, 'Account should pay for the shares').toBe(
       checking.balance - ACME_ORDER.shares * ACME_ORDER.pricePerShare,
     );
@@ -56,13 +58,17 @@ test.describe('ParaBank REST: positions', () => {
     });
 
     expect(response.status(), 'Sell position should return 200').toBe(200);
-    expect(await (await getPosition(position.positionId)).json(), 'Position should keep the rest').toMatchObject({
+    expect(
+      await (await getPosition(position.positionId)).json(),
+      'Position should keep the rest',
+    ).toMatchObject({
       positionId: position.positionId,
       shares: ACME_ORDER.shares - SOLD_SHARES,
     });
-    expect((await fetchAccount(checking.id)).balance, 'Account should receive the sale amount').toBe(
-      paid.balance + SOLD_SHARES * SALE_PRICE,
-    );
+    expect(
+      (await fetchAccount(checking.id)).balance,
+      'Account should receive the sale amount',
+    ).toBe(paid.balance + SOLD_SHARES * SALE_PRICE);
   });
 
   test('Full sale deletes the position', async () => {
@@ -91,8 +97,12 @@ test.describe('ParaBank REST: positions', () => {
     });
 
     expect(response.status(), 'Selling an unknown position should return 400').toBe(400);
-    expect(await response.text(), 'Error should explain the failed sale').toContain('Could not sell position');
-    expect((await fetchAccount(checking.id)).balance, 'Balance should not change').toBe(checking.balance);
+    expect(await response.text(), 'Error should explain the failed sale').toContain(
+      'Could not sell position',
+    );
+    expect((await fetchAccount(checking.id)).balance, 'Balance should not change').toBe(
+      checking.balance,
+    );
   });
 
   test('Unknown position is not found', async () => {

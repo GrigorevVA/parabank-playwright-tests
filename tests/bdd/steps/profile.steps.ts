@@ -7,9 +7,10 @@ import { Then, When } from './fixtures';
 
 async function expectProfile(customer: NewCustomer): Promise<void> {
   for (const field of PROFILE_FIELDS) {
-    await expect(UpdateProfilePage.field(field).locator, `${field} should show ${customer[field]}`).toHaveValue(
-      customer[field],
-    );
+    await expect(
+      UpdateProfilePage.field(field).locator,
+      `${field} should show ${customer[field]}`,
+    ).toHaveValue(customer[field]);
   }
 }
 

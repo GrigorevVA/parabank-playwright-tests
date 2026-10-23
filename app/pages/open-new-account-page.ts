@@ -20,7 +20,10 @@ export class OpenNewAccountPage {
 
   static readonly newAccountLink = () =>
     new HtmlElement(
-      getPage().getByRole('paragraph').filter({ hasText: 'Your new account number:' }).getByRole('link'),
+      getPage()
+        .getByRole('paragraph')
+        .filter({ hasText: 'Your new account number:' })
+        .getByRole('link'),
       'New account link',
     );
 
@@ -34,6 +37,8 @@ export class OpenNewAccountPage {
   }
 
   static async getNewAccountNumber(): Promise<string> {
-    return step('Get new account number', () => OpenNewAccountPage.newAccountLink().locator.innerText());
+    return step('Get new account number', () =>
+      OpenNewAccountPage.newAccountLink().locator.innerText(),
+    );
   }
 }

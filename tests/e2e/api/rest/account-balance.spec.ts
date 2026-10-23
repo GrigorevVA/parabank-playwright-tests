@@ -29,8 +29,15 @@ test.describe('ParaBank REST: account balance', () => {
     expect((await fetchAccount(checking.id)).balance, 'Balance should increase by the amount').toBe(
       checking.balance + AMOUNT,
     );
-    expect(await fetchAccountTransactions(checking.id), 'Deposit should appear as a credit').toContainEqual(
-      expect.objectContaining({ type: 'Credit', amount: AMOUNT, description: 'Deposit via Web Service' }),
+    expect(
+      await fetchAccountTransactions(checking.id),
+      'Deposit should appear as a credit',
+    ).toContainEqual(
+      expect.objectContaining({
+        type: 'Credit',
+        amount: AMOUNT,
+        description: 'Deposit via Web Service',
+      }),
     );
   });
 
@@ -44,8 +51,15 @@ test.describe('ParaBank REST: account balance', () => {
     expect((await fetchAccount(checking.id)).balance, 'Balance should decrease by the amount').toBe(
       checking.balance - AMOUNT,
     );
-    expect(await fetchAccountTransactions(checking.id), 'Withdrawal should appear as a debit').toContainEqual(
-      expect.objectContaining({ type: 'Debit', amount: AMOUNT, description: 'Withdraw via Web Service' }),
+    expect(
+      await fetchAccountTransactions(checking.id),
+      'Withdrawal should appear as a debit',
+    ).toContainEqual(
+      expect.objectContaining({
+        type: 'Debit',
+        amount: AMOUNT,
+        description: 'Withdraw via Web Service',
+      }),
     );
   });
 

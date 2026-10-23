@@ -7,26 +7,33 @@ import type { Payee } from '../api/rest/bill-pay';
 import { formRow } from '../components/form-row';
 
 export class BillPayPage {
-  static readonly payeeNameInput = () => new Input(formRow('Payee Name:').locator('input'), 'Payee Name input');
+  static readonly payeeNameInput = () =>
+    new Input(formRow('Payee Name:').locator('input'), 'Payee Name input');
 
-  static readonly addressInput = () => new Input(formRow('Address:').locator('input'), 'Address input');
+  static readonly addressInput = () =>
+    new Input(formRow('Address:').locator('input'), 'Address input');
 
   static readonly cityInput = () => new Input(formRow('City:').locator('input'), 'City input');
 
   static readonly stateInput = () => new Input(formRow('State:').locator('input'), 'State input');
 
-  static readonly zipCodeInput = () => new Input(formRow('Zip Code:').locator('input'), 'Zip Code input');
+  static readonly zipCodeInput = () =>
+    new Input(formRow('Zip Code:').locator('input'), 'Zip Code input');
 
   static readonly phoneInput = () => new Input(formRow('Phone #:').locator('input'), 'Phone input');
 
   // "Account #:" is also part of "Verify Account #:"
   static readonly accountInput = () =>
-    new Input(formRow('Account #:').filter({ hasNotText: 'Verify' }).locator('input'), 'Account input');
+    new Input(
+      formRow('Account #:').filter({ hasNotText: 'Verify' }).locator('input'),
+      'Account input',
+    );
 
   static readonly verifyAccountInput = () =>
     new Input(formRow('Verify Account #:').locator('input'), 'Verify Account input');
 
-  static readonly amountInput = () => new Input(formRow('Amount:').locator('input'), 'Amount input');
+  static readonly amountInput = () =>
+    new Input(formRow('Amount:').locator('input'), 'Amount input');
 
   static readonly fromAccountSelect = () =>
     new Select(formRow('From account #:').getByRole('combobox'), 'From account select');

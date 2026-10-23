@@ -19,7 +19,10 @@ test.describe('ParaBank SOAP: login', () => {
 
     expect(response.status(), 'SOAP login should return 200').toBe(200);
     const { loginResponse } = parseSoapBody<LoginResponse>(await response.text());
-    expect(loginResponse.customerId, 'SOAP login should return the registered customer').toMatchObject({
+    expect(
+      loginResponse.customerId,
+      'SOAP login should return the registered customer',
+    ).toMatchObject({
       firstName: newCustomer.firstName,
       lastName: newCustomer.lastName,
       address: { city: newCustomer.city, zipCode: newCustomer.zipCode },
