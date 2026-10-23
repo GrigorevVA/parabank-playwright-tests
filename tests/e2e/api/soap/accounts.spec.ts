@@ -3,7 +3,10 @@ import { apiTest as test, expect } from '@fixtures/base.fixture';
 import { buildCustomer } from '@app/api/rest/builders/customer-builder';
 import { registerCustomer } from '@app/api/rest/helpers/customer-helper';
 import type { Customer } from '@app/api/rest/login';
+import { fetchCustomerAccounts } from '@app/api/rest/helpers/account-helper';
+import { soapCreateAccount, type CreateAccountResponse } from '@app/api/soap/create-account';
 import { soapGetAccount } from '@app/api/soap/get-account';
+import { fetchSoapAccount } from '@app/api/soap/helpers/account-helper';
 import {
   ACCOUNT_LIST_TAGS,
   soapGetAccounts,
@@ -37,6 +40,22 @@ test.describe('ParaBank SOAP: accounts', () => {
       customerId: String(customer.id),
       type: 'CHECKING',
     });
+  });
+
+  test('Customer opens SAVINGS account', async () => {
+    const [checking] = await fetchCustomerAccounts(customer.id);
+
+    const response = await soapCreateAccount(customer.id, 'SAVINGS', checking.id);
+
+    expect(response.status(), 'SOAP createAccount should return 200').toBe(200);
+    const { account } = parseSoapBody<CreateAccountResponse>(
+      await response.text(),
+    ).createAccountResponse;
+    expect(account.type, 'New account should be SAVINGS').toBe('SAVINGS');
+    expect(
+      await fetchSoapAccount(Number(account.id)),
+      'New account should be readable by id',
+    ).toMatchObject({ id: account.id, customerId: String(customer.id), type: 'SAVINGS' });
   });
 
   test('Unknown account returns fault', async () => {

@@ -8,7 +8,7 @@ const CREATE_ACCOUNT_URL = 'services/bank/createAccount';
 // LOAN accounts appear only after an approved loan request
 export type NewAccountType = Exclude<AccountType, 'LOAN'>;
 
-const ACCOUNT_TYPE_CODE: Record<NewAccountType, number> = { CHECKING: 0, SAVINGS: 1 };
+export const ACCOUNT_TYPE_CODE: Record<NewAccountType, number> = { CHECKING: 0, SAVINGS: 1 };
 
 export function postCreateAccount(
   customerId: number,

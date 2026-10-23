@@ -12,10 +12,10 @@ The tests run against a local ParaBank in Docker. The public site rate-limits re
 | Suite | Scenarios | Tests |
 |---|---|---|
 | REST | login (valid / wrong password), customer (read, update, unknown customer), accounts (new customer, open CHECKING / SAVINGS, unknown account), balance (deposit, withdrawal, unknown account), transfer, transactions (bill payment, read by id, find by amount, unknown transaction), positions (buy, partial sale, full sale, unknown position), loan requests (approved / denied, data-driven), known defects (4, expected to fail) | 30 |
-| SOAP | login (valid / fault), accounts (new customer, fault for unknown account), transfer | 5 |
+| SOAP | login (valid / fault), customer (read, update, fault), accounts (new customer, open SAVINGS, fault for unknown account), balance (deposit, withdrawal, fault), transfer, positions (buy, partial sale, full sale), loan requests (approved / denied, data-driven) | 19 |
 | UI (BDD) | registration (success, taken username, password mismatch, required fields), login (valid, wrong password, log out), profile update, accounts (open CHECKING / SAVINGS, bill payment, transfer funds) | 14 |
 
-Tests follow CRUD per entity: every create or update is confirmed by a separate read, through the API or by reopening the page in the UI.
+Tests follow CRUD per entity: every create or update is confirmed by a separate read, through the API or by reopening the page in the UI. REST and SOAP cover the same operations, except bill payment, which is REST and UI only.
 
 | Entity | Create | Read | Update | Delete |
 |---|---|---|---|---|
