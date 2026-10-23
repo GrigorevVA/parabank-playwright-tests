@@ -8,6 +8,8 @@ import { soapGetCustomer, type GetCustomerResponse } from '@app/api/soap/get-cus
 import { fetchSoapCustomer } from '@app/api/soap/helpers/customer-helper';
 import { soapUpdateCustomer, type UpdateCustomerResponse } from '@app/api/soap/update-customer';
 import { UNKNOWN_CUSTOMER_ID } from '@app/data/negative-data';
+import { allureLabels } from '@core/utils/allure-labels';
+import { EPIC } from '@app/data/report-labels';
 
 // SOAP values are strings, so expected data is compared as text
 const contactData = (customer: NewCustomer) => ({
@@ -18,7 +20,7 @@ const contactData = (customer: NewCustomer) => ({
 });
 
 // CRUD: create = registration in beforeEach, delete is not supported by ParaBank
-test.describe('ParaBank SOAP: customer', () => {
+test.describe('ParaBank SOAP: customer', allureLabels(EPIC.SOAP, 'Customer', 'normal'), () => {
   let newCustomer: NewCustomer;
   let customer: Customer;
 

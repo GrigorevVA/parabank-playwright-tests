@@ -10,10 +10,12 @@ import { registerCustomer } from '@app/api/rest/helpers/customer-helper';
 import { fetchSoapAccount } from '@app/api/soap/helpers/account-helper';
 import { soapTransfer, type TransferResponse } from '@app/api/soap/transfer';
 import { parseSoapBody } from '@core/api/soap';
+import { allureLabels } from '@core/utils/allure-labels';
+import { EPIC } from '@app/data/report-labels';
 
 const TRANSFER_AMOUNT = 10;
 
-test.describe('ParaBank SOAP: transfer', () => {
+test.describe('ParaBank SOAP: transfer', allureLabels(EPIC.SOAP, 'Transfer', 'critical'), () => {
   let checking: Account;
   let savings: Account;
 

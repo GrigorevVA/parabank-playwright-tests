@@ -6,8 +6,10 @@ import { registerCustomer } from '@app/api/rest/helpers/customer-helper';
 import type { Customer } from '@app/api/rest/login';
 import { ACCOUNT_TYPES } from '@app/data/account-types';
 import { UNKNOWN_ACCOUNT_ID } from '@app/data/negative-data';
+import { allureLabels } from '@core/utils/allure-labels';
+import { EPIC } from '@app/data/report-labels';
 
-test.describe('ParaBank REST: accounts', () => {
+test.describe('ParaBank REST: accounts', allureLabels(EPIC.REST, 'Accounts', 'normal'), () => {
   let customer: Customer;
 
   test.beforeEach(async () => {

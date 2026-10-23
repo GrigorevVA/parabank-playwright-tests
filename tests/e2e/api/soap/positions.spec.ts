@@ -14,12 +14,14 @@ import { soapGetPosition } from '@app/api/soap/get-position';
 import { fetchSoapPosition, fetchSoapPositions } from '@app/api/soap/helpers/position-helper';
 import { soapSellPosition, type SellPositionResponse } from '@app/api/soap/sell-position';
 import { ACME_ORDER, SALE_PRICE } from '@app/data/position-orders';
+import { allureLabels } from '@core/utils/allure-labels';
+import { EPIC } from '@app/data/report-labels';
 
 const SOLD_SHARES = 4;
 
 // CRUD: buy creates a position, partial sale updates it, full sale deletes it;
 // positions for the update and delete tests are bought via REST as setup
-test.describe('ParaBank SOAP: positions', () => {
+test.describe('ParaBank SOAP: positions', allureLabels(EPIC.SOAP, 'Positions', 'normal'), () => {
   let checking: Account;
 
   test.beforeEach(async () => {

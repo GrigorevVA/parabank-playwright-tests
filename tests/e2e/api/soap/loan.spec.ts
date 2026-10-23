@@ -7,8 +7,10 @@ import { registerCustomer } from '@app/api/rest/helpers/customer-helper';
 import { fetchSoapAccount } from '@app/api/soap/helpers/account-helper';
 import { soapRequestLoan, type RequestLoanResponse } from '@app/api/soap/request-loan';
 import { APPROVED_LOANS, DENIED_LOANS } from '@app/data/loan-requests';
+import { allureLabels } from '@core/utils/allure-labels';
+import { EPIC } from '@app/data/report-labels';
 
-test.describe('ParaBank SOAP: loan', () => {
+test.describe('ParaBank SOAP: loan', allureLabels(EPIC.SOAP, 'Loan', 'normal'), () => {
   let checking: Account;
 
   test.beforeEach(async () => {

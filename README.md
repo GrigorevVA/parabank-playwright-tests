@@ -87,6 +87,8 @@ npm test
 - `report` merges the results into one Allure report;
 - on `main`, `publish` deploys the report to [GitHub Pages](https://grigorevva.github.io/parabank-playwright-tests/) with run history.
 
+The report tree is grouped by epic (REST API, SOAP API, UI (BDD)) and feature; every test has a severity. API specs get the labels from `allureLabels()` on `test.describe`, BDD scenarios from a `Before` hook (feature title and an optional `@severity:` tag). Known defects have their own category.
+
 Pull requests to `main` require `lint` and both test jobs to pass. Actions and images are pinned by SHA / digest, and only the publish job has write permissions.
 
 ## Stand quirks handled by the framework

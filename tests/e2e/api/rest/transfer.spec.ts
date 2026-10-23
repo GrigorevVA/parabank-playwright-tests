@@ -8,10 +8,12 @@ import {
 } from '@app/api/rest/helpers/account-helper';
 import { registerCustomer } from '@app/api/rest/helpers/customer-helper';
 import { postTransfer } from '@app/api/rest/transfer';
+import { allureLabels } from '@core/utils/allure-labels';
+import { EPIC } from '@app/data/report-labels';
 
 const TRANSFER_AMOUNT = 10;
 
-test.describe('ParaBank REST: transfer', () => {
+test.describe('ParaBank REST: transfer', allureLabels(EPIC.REST, 'Transfer', 'critical'), () => {
   let checking: Account;
   let savings: Account;
 

@@ -4,8 +4,10 @@ import { registerCustomer } from '@app/api/rest/helpers/customer-helper';
 import { getLogin, type Customer } from '@app/api/rest/login';
 import type { NewCustomer } from '@app/api/rest/register';
 import { WRONG_PASSWORD } from '@app/data/negative-data';
+import { allureLabels } from '@core/utils/allure-labels';
+import { EPIC } from '@app/data/report-labels';
 
-test.describe('ParaBank REST: login', () => {
+test.describe('ParaBank REST: login', allureLabels(EPIC.REST, 'Login', 'critical'), () => {
   let newCustomer: NewCustomer;
 
   test.beforeEach(async () => {

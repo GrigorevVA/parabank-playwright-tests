@@ -6,5 +6,5 @@ Application-independent core. Changes rarely.
 |---|---|
 | `elements/` | `HtmlElement(locator, name)` and subclasses for real HTML behaviour: `Input`, `Select` |
 | `api/` | `expectStatus` (soft / hard via options), SOAP envelope builder (values are XML-escaped) and response parser |
-| `utils/` | `step()`, `TIMEOUT` (SHORT 5s, MEDIUM 10s, LONG 60s), `ENV` |
+| `utils/` | `step()`, `TIMEOUT` (SHORT 5s, MEDIUM 10s, LONG 60s), `ENV`, `allureLabels()` (epic, feature, severity for `test.describe`) |
 | `page-holder.ts`, `request-holder.ts` | `setPage()` / `getPage()`, `setRequest()` / `getRequest()` |

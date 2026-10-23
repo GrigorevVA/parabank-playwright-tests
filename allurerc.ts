@@ -9,11 +9,13 @@ export default {
   // CI restores it from GitHub Pages before generating a new report
   historyPath: './allure-report/history.jsonl',
   historyLimit: 20,
+  // tests marked with test.fail() for ParaBank defects (tag @known-defect)
+  categories: [{ name: 'Known ParaBank defects', matchers: { labels: { tag: 'known-defect' } } }],
   plugins: {
     awesome: {
       options: {
-        // api / bdd first (Playwright projects), then describe blocks and features
-        groupBy: ['parentSuite', 'subSuite'],
+        // epic (REST API / SOAP API / UI) first, then the feature (entity or Gherkin feature)
+        groupBy: ['epic', 'feature'],
         reportLanguage: 'en',
       },
     },

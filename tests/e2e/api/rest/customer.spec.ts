@@ -6,9 +6,11 @@ import type { Customer } from '@app/api/rest/login';
 import type { NewCustomer } from '@app/api/rest/register';
 import { postUpdateCustomer } from '@app/api/rest/update-customer';
 import { UNKNOWN_CUSTOMER_ID } from '@app/data/negative-data';
+import { allureLabels } from '@core/utils/allure-labels';
+import { EPIC } from '@app/data/report-labels';
 
 // CRUD: create = registration in beforeEach, delete is not supported by ParaBank
-test.describe('ParaBank REST: customer', () => {
+test.describe('ParaBank REST: customer', allureLabels(EPIC.REST, 'Customer', 'normal'), () => {
   let newCustomer: NewCustomer;
   let customer: Customer;
 
