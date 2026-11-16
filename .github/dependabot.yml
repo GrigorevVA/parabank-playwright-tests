@@ -3,7 +3,8 @@ version: 2
 # new versions are proposed only after 14 days, like the rule for manual updates.
 # Updated by hand, not by Dependabot:
 # - Playwright: package.json, docker/Dockerfile and container.image in tests.yml must use the same version;
-# - ParaBank image digest (docker-compose.yml, tests.yml): the image has no version tags to track.
+# - ParaBank image digest (docker-compose.yml, tests.yml): the image has no version tags to track;
+# - TypeScript major versions: typescript-eslint supports TypeScript < 6.1, TypeScript 7 has no JS API for it.
 updates:
   - package-ecosystem: npm
     directory: /
@@ -13,6 +14,8 @@ updates:
       default-days: 14
     ignore:
       - dependency-name: '@playwright/test'
+      - dependency-name: 'typescript'
+        update-types: ['version-update:semver-major']
     groups:
       npm:
         patterns: ['*']
